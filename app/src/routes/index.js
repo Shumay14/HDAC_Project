@@ -8,8 +8,8 @@ const ctrl = require("./home.ctrl");
 // API
 
 router.get("/", ctrl.home);
-router.get("home/login", ctrl.login);
-router.get("home/register", ctrl.register);
-router.get("home/nftcard", ctrl.nftcard);
+router.get("/login", ctrl.login);
+router.get("/register", ctrl.register);
+router.get("/nftcard", ctrl.nftcard);
 
 module.exports = router;
