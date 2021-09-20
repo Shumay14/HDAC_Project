@@ -24,6 +24,7 @@ app.use(express.static(publicDirectory));
 app.use(express.urlencoded({ extended: false }));
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
+
 // Use token as middleware
 app.use(function(req, res, next) {
     res.header(
