@@ -12,9 +12,9 @@ const account_id = document.querySelector("#account-id"),
 registerBtn.addEventListener("click", register);
 
 function register() {
-  if (!account_id.value) return alert("아이디를 입력해주십시오.");
+  if (!account_id.value) return alert("Please enter account ID.");
   if (password.value !== confirmPassword.value)
-    return alert("비밀번호가 일치하지 않습니다.");
+    return alert("Incorrect password.");
 
   const req = {
     account_id: account_id.value,
