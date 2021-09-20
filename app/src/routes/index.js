@@ -3,21 +3,33 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-const upload = multer({
-    storage: "uploads/"
+const uploadProfile = multer({
+    dest: "uploads/profile",
+    //limits: { fileSize: 5 * 256 * 256 }
 });
 
-const multiImg = upload.fields([{ name: 'background', maxCount: 1 }, { name: 'profiles', maxCount: 3 }]);
+const uploadArt = multer({
+    dest: "uploads/art",
+    //limits: { fileSize: 5 * 1024 * 1024 }
+});
 
-const ctrl = require("./home.ctrl");
+const home_ctrl = require("./home.ctrl");
+const art_ctrl = require("./art.ctrl");
+const auth_ctrl = require("./auth.ctrl")
 
 // API
+// HOME
+router.get("/", home_ctrl.output.home);
+router.get("/login", home_ctrl.output.login);
+router.get("/register", home_ctrl.output.register);
 
-router.get("/", ctrl.output.home);
-router.get("/login", ctrl.output.login);
-router.get("/register", ctrl.output.register);
-router.get("/nftcard", ctrl.output.nftcard);
+router.post("/login", home_ctrl.process.login);
+router.post("/register", [uploadProfile.single('profile_image')], home_ctrl.process.register);
 
-router.post("/multi", multiImg, crtl.uploadMultiImages);
+// ART
+router.get("/showArt", art_ctrl.output.showArt);
+router.get("/registerArt", art_ctrl.output.registerArt);
+
+router.post("/registerArt", [auth_ctrl.verifyToken, uploadProfile.single('art_image')], art_ctrl.process.registerArt);
 
 module.exports = router;

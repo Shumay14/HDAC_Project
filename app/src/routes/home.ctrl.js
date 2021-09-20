@@ -1,4 +1,5 @@
 "use strict";
+const multer = require('multer');
 
 const Account = require("../models/Account");
 
@@ -12,19 +13,40 @@ const output = {
   register: (req, res) => {
     res.render("register");
   },
-  nftcard: (req, res) => {
-    res.render("nftcard");
-  },
 };
 
-
 const process = {
-  
+  login: async (req, res) => {
+    const account = new Account(req.body);
+    const response = await account.login();
+
+    const url = {
+      method: "POST",
+      path: "/login",
+      
+    };
+
+    return res.json(response);
+  },
+
+  register: async (req, res) => {
+    req.body.profile_image_path = req.file.path;
+
+    const account = new Account(req.body);
+    const response = await account.register();
+
+    const url = {
+      method: "POST",
+      path: "/register",
+      
+    };
+
+    return res.json(response);
+  },
+
 }
 
 module.exports = {
-  home,
-  login,
-  register,
-  nftcard,
+  output,
+  process,
 };

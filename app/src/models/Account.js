@@ -1,5 +1,9 @@
 "use strict";
 
+const config = require("../config/auth");
+var auth = require("jsonwebtoken");
+var bcrypt = require("bcryptjs");
+
 const AccountSQL = require("./AccountSQL");
 
 class Account {
@@ -23,14 +27,18 @@ class Account {
     const client = this.body;
     try {
       const user = await AccountSQL.getAccountInfo(client.account_id);
-
       if (user) {
-        if (user.account_id === client.account_id && user.password === client.password) {
-          return { success: true };
+        if (user.account_id === client.account_id && 
+            bcrypt.compareSync(client.password, user.password)) {
+              var token = auth.sign({ account_id: user.account_id }, 
+                                      config.secret, {
+                                      expiresIn: 86400 // 24 hours
+                                    });
+          return { success: true, accessToken: token };
         }
-        return { success: false, msg: "Incorrect Password!" };
+        return { success: false, accessToken: null, msg: "Incorrect Password!" };
       }
-      return { success: false, msg: "Incorrect Account ID!" };
+      return { success: false, accessToken: null, msg: "Incorrect Account ID!" };
     } catch (err) {
       return { success: false, err };
     }

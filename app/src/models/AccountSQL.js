@@ -1,12 +1,14 @@
 "use strict";
 
+var bcrypt = require("bcryptjs");
+
 const db = require("../config/db");
 
 // Profile
-class AccountStorage {
+class AccountSQL {
   static getAccountInfo(account_id) {
     return new Promise((resolve, reject) => {
-      const query = "SELECT * FROM account WHERE account-id = ?;";
+      const query = "SELECT * FROM account WHERE account_id = ?;";
       db.query(query, [account_id], (err, data) => {
         if (err) reject(`${err}`);
         else resolve(data[0]);
@@ -18,15 +20,15 @@ class AccountStorage {
   static async register(account) {
     return new Promise((resolve, reject) => {
       const query =
-        "INSERT INTO account(account-id, wallet-address, profile-image, email, password) VALUES(?, ?, ?, ?, ?);";
+        "INSERT INTO account(account_id, wallet_address, profile_image_path, email, password) VALUES(?, ?, ?, ?, ?);";
       db.query(
         query,
         [
           account.account_id,
           account.wallet_address,
-          account.profile_image,
+          account.profile_image_path,
           account.email,
-          account.password,
+          bcrypt.hashSync(account.password, 8),
         ],
         (err) => {
           if (err) reject(`${err}`);
@@ -35,22 +37,6 @@ class AccountStorage {
       );
     });
   }
-
-  // Login
-  // static Login(loginInfo) {
-  //   return new Promise((resolve, reject) => {
-  //     const query =
-  //       "SELECT id FROM account WHERE account-id = ? AND password = ?;";
-  //     db.query(
-  //       query,
-  //       [loginInfo.account-id, loginInfo.password],
-  //       (err, data) => {
-  //         if (err) reject(`${err}`);
-  //         else resolve(data[0]);
-  //       }
-  //     );
-  //   });
-  // }
 }
 
-module.exports = AccountStorage;
+module.exports = AccountSQL;
