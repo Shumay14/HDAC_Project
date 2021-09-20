@@ -49,4 +49,4 @@ class Account {
 
 }
 
-module.exports = User;
+module.exports = Account;

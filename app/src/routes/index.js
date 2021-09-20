@@ -13,10 +13,10 @@ const ctrl = require("./home.ctrl");
 
 // API
 
-router.get("/", ctrl.home);
-router.get("/login", ctrl.login);
-router.get("/register", ctrl.register);
-router.get("/nftcard", ctrl.nftcard);
+router.get("/", ctrl.output.home);
+router.get("/login", ctrl.output.login);
+router.get("/register", ctrl.output.register);
+router.get("/nftcard", ctrl.output.nftcard);
 
 router.post("/multi", multiImg, crtl.uploadMultiImages);
 

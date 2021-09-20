@@ -1,20 +1,26 @@
 "use strict";
 
-const home = (req, res) => {
-  res.render("index");
+const Account = require("../models/Account");
+
+const output = {
+  home: (req, res) => {
+    res.render("index");
+  },
+  login: (req, res) => {
+    res.render("login");
+  },
+  register: (req, res) => {
+    res.render("register");
+  },
+  nftcard: (req, res) => {
+    res.render("nftcard");
+  },
 };
 
-const login = (req, res) => {
-  res.render("login");
-};
 
-const register = (req, res) => {
-  res.render("register");
-};
-
-const nftcard = (req, res) => {
-  res.render("nftcard");
-};
+const process = {
+  
+}
 
 module.exports = {
   home,
