@@ -1,7 +1,7 @@
 "use strict";
 
-const config = require("../config/auth");
-var auth = require("jsonwebtoken");
+const auth = require("../config/auth");
+var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
 const AccountSQL = require("./AccountSQL");
@@ -16,7 +16,7 @@ class Account {
     try {
         const user = await AccountSQL.getAccountInfo(client.account_id);
         if (user) {
-            return { success: true, user };
+          return { success: true, user };
         }
     } catch (err) {
         return { success: false, err };
@@ -30,8 +30,8 @@ class Account {
       if (user) {
         if (user.account_id === client.account_id && 
             bcrypt.compareSync(client.password, user.password)) {
-              var token = auth.sign({ account_id: user.account_id }, 
-                                      config.secret, {
+              var token = jwt.sign({ account_id: user.account_id }, 
+                                      auth.secret, {
                                       expiresIn: 86400 // 24 hours
                                     });
           return { success: true, accessToken: token };

@@ -24,8 +24,7 @@ const process = {
       
     };
 
-    log(response, url);
-    return res.status(url).json(response);
+    return res.json(response);
   },
 
 }

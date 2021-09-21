@@ -20,12 +20,6 @@ const process = {
     const account = new Account(req.body);
     const response = await account.login();
 
-    const url = {
-      method: "POST",
-      path: "/login",
-      
-    };
-
     return res.json(response);
   },
 
@@ -34,12 +28,6 @@ const process = {
 
     const account = new Account(req.body);
     const response = await account.register();
-
-    const url = {
-      method: "POST",
-      path: "/register",
-      
-    };
 
     return res.json(response);
   },

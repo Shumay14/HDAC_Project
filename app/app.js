@@ -34,7 +34,6 @@ app.use(function(req, res, next) {
     next();
 });
 
-
 // Define Routes or Controller = middle ware
 app.use("/", home);
 

@@ -1,6 +1,5 @@
 "use strict";
 
-// select by id
 const account_id = document.querySelector("#account_id"),
   password = document.querySelector("#password"),
   loginBtn = document.querySelector("#button");

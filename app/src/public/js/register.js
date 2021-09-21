@@ -24,8 +24,8 @@ function register() {
     wallet_address: wallet_address.value
   };
 
-  fetch('/profile', {
-      method: 'POST',
+  fetch("/profile", {
+      method: "POST",
       body: new FormData(profile_image.file)
     });
 
