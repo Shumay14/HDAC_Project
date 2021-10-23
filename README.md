@@ -107,13 +107,20 @@ UX – 기부자와 아티스트가 서비스를 사용하는데, 어려움이 �
 - Server & Database Backend 개발 / 서장연
 
 Node.js 의 Express 프레임워크로 서버 구축 / mySQL, phpmyadmin 워크벤치로 DataBase 구축
+
 MVC 구조를 기본으로 Views ~ Routes ~ Models 간의 Data 처리 프로세스를 설계
+
 Models, Config, Routes, Public 파트 개발
 
+
 UserInfo, ArtInfo DB 구조설계, Account_Address ForeignKey Cascade 설정
+
 회원가입 시 비밀번호가 암호화 처리되어 DB에 보안 저장
+
 로그인 유지를 위해 JWT 사용
+
 Profile, Art Image 업로드 시 파일명 중복을 막기 위해 타임스탬프 + 해시 기능을 사용
+
 
 - 인터랙티브 웹 UX/UI설계 및 디자인 / EunKyung Jung
 
