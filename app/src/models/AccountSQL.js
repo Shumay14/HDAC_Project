@@ -16,8 +16,18 @@ class AccountSQL {
     });
   }
 
-  // Register
-  static async register(account) {
+  static getAccountInfo2() {
+    return new Promise((resolve, reject) => {
+      const query = "SELECT * FROM account;";
+      db.query(query, (err, data) => {
+        if (err) reject(`${err}`);
+        else resolve(data);
+      });
+    });
+  }
+
+  // Register Account
+  static async signUp(account) {
     return new Promise((resolve, reject) => {
       const query =
         "INSERT INTO account(account_id, wallet_address, profile_image_path, email, password) VALUES(?, ?, ?, ?, ?);";

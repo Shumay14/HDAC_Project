@@ -13,6 +13,8 @@ class Account {
 
   async getProfile() {
     const client = this.body;
+    console.log("req.body", client);
+
     try {
         const user = await AccountSQL.getAccountInfo(client.account_id);
         if (user) {
@@ -23,7 +25,19 @@ class Account {
       }
   }
 
-  async login() {
+  async getProfileAll() {
+    const clients = this.body;
+    try {
+        const user = await AccountSQL.getAccountInfo2(clients);
+        if (user) {
+          return { success: true, user };
+        }
+    } catch (err) {
+        return { success: false, err };
+      }
+  }
+
+  async signIn() {
     const client = this.body;
     try {
       const user = await AccountSQL.getAccountInfo(client.account_id);
@@ -44,7 +58,7 @@ class Account {
     }
   }
 
-  async register() {
+  async signUp() {
     const client = this.body;
     try {
       const response = await AccountSQL.register(client);

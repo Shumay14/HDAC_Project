@@ -1,5 +1,19 @@
 "use strict";
 
+const signUpButton = document.getElementById("signUp");
+const signInButton = document.getElementById("signIn");
+const container = document.getElementById("container");
+
+signUpButton.addEventListener("click", () => {
+  container.classList.add("right-panel-active");
+});
+
+
+signInButton.addEventListener("click", () => {
+  container.classList.remove("right-panel-active");
+});
+
+
 const account_id = document.querySelector("#account_id"),
   name_str = document.querySelector("#name"),
   password = document.querySelector("#password"),
